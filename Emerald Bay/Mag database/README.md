@@ -13,7 +13,6 @@ The files are:
   - `AVALANCH.LIB` - a library of useful functions (my company at the time was called Avalanche, so I probably intended this to be a library to be used across a number of applications).
   - `REFERENC.EBD` - the binary database file.
   - `REFERENC.EBX` - the binary index file.
-
 - System files:
   - `EB.EXE` - the executable for the database engine (server) that lives in the upper part of memory.
   - `EAGLE.EXE` - the executable for the Eagle front-end.

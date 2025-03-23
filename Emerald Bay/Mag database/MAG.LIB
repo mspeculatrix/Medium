@@ -108,53 +108,53 @@ SAVE SCREEN choicebox from 5,55 to 14,72
 @ 5,55 clear to 14,72
 @ 5,55 double box to 14,72
 @ 6,58 say "Select:"
-@ 7,57 prompt " USE DEFAULT  "  named "default";
+@ 7,57 prompt " USE DEFAULT "  named "default";
                             up "other";
                             left "default";
                             right "default"
-@ 8,57 prompt " AvWeek       " named "avweek";
+@ 8,57 prompt " AvWeek      " named "avweek";
                             left "avweek";
                             right "avweek"
-@ 9,57 prompt " Flying       " named "flying";
+@ 9,57 prompt " Flying      " named "flying";
                             left "flying";
                             right "flying"
-@10,57 prompt " Flight Int   " named "flight";
-                               left "flight";
-                               right "flight" 
-@11,57 prompt " Pilot        " named "pilot";
+@10,57 prompt " Flight Int  " named "flight";
+                            left "flight";
+                            right "flight"
+@11,57 prompt " Pilot       " named "pilot";
                             left "pilot";
                             right "pilot"
-@12,57 prompt " Flyer        " named "flyer";
+@12,57 prompt " Flyer       " named "flyer";
                             left "flyer";
                             right "flyer"
-@13,57 prompt " OTHER        " named "other";
-                               left "other";
-                               right "other";
-                               down "default"
+@13,57 prompt " OTHER       " named "other";
+                            left "other";
+                            right "other";
+                            down "default"
 READ
 keypressed = readget()
 SWITCH
   CASE keypressed = 'default'
-       pub = defpub
+    pub = defpub
   CASE keypressed = 'avweek'
-       pub = 'Aviation Week & Space Technology'
+    pub = 'Aviation Week & Space Technology'
   CASE keypressed = 'flying'
-       pub = 'Flying'
+    pub = 'Flying'
   CASE keypressed = 'flight'
-       pub = 'Flight International'
+    pub = 'Flight International'
   CASE keypressed = 'pilot'
-       pub = 'Pilot'
+    pub = 'Pilot'
   CASE keypressed = 'flyer'
-       pub = 'Flyer'
+    pub = 'Flyer'
   CASE keypressed = 'other'
-       @ 4,0 get FTempPub picture '75x' option 'b+s+p+' Message ' Enter publication name'
-       READ
-       Abortx = ReadKey()
-       If Abortx <> 271
-         Pub = FTempPub
-       Else
-         Pub = 'abort'  
-       EndIf
+    @ 4,0 get FTempPub picture '75x' option 'b+s+p+' Message ' Enter publication name'
+    READ
+    Abortx = ReadKey()
+    If Abortx <> 271
+      Pub = FTempPub
+    Else
+      Pub = 'abort'
+    EndIf
 ENDSWITCH
 RESTORE SCREEN from choicebox at 5,55
 RETURN pub
@@ -207,86 +207,86 @@ KeyOK = .T.
 Do ClearError
 SWITCH
   Case KeyStr = 'down'
-       Do Centre with 'SEARCHING...',21
-       Set Display Off
-       If .not. EOT()
-         Skip 1
-       Else
-         Beep
-       Endif
-       If EOT()
-         Skip -1
-         Do AvError with 'END OF DATA'
-         KeyOK = .F.
-       Endif
-       Set Display On
-       If .not. EOT()
-         Do Centre with '              ',21
-       Endif
+    Do Centre with 'SEARCHING...',21
+    Set Display Off
+    If .not. EOT()
+      Skip 1
+    Else
+      Beep
+    Endif
+    If EOT()
+      Skip -1
+      Do AvError with 'END OF DATA'
+      KeyOK = .F.
+    Endif
+    Set Display On
+    If .not. EOT()
+      Do Centre with '              ',21
+    Endif
   Case KeyStr = 'up'
-       Do Centre with 'SEARCHING...',21
-       Set Display Off
-       If .not. BOT()
-         Skip -1
-       Else
-         Beep
-       Endif
-       If BOT()
-         Skip 1
-         Do AvError with 'START OF DATA'
-         KeyOK = .F.
-       Endif
-       Set Display On
-       If .not. BOT()
-         Do Centre with '              ',21
-       EndIf
+    Do Centre with 'SEARCHING...',21
+    Set Display Off
+    If .not. BOT()
+      Skip -1
+    Else
+      Beep
+    Endif
+    If BOT()
+      Skip 1
+      Do AvError with 'START OF DATA'
+      KeyOK = .F.
+    Endif
+    Set Display On
+    If .not. BOT()
+      Do Centre with '              ',21
+    EndIf
   Case KeyStr = 'PgUp'
-       Do Centre with 'SEARCHING...',21
-       Set Display Off
-       Skip -5
-       Set Display On
-       If BOT()
-         Do AvError with 'Start of Table Encountered'
-         Go Top
-       EndIf
-       Do Centre with '              ',21
+    Do Centre with 'SEARCHING...',21
+    Set Display Off
+    Skip -5
+    Set Display On
+    If BOT()
+      Do AvError with 'Start of Table Encountered'
+      Go Top
+    EndIf
+    Do Centre with '              ',21
   Case KeyStr = 'PgDn'
-       Do Centre with 'SEARCHING...',21
-       Set Display Off
-       Skip 5
-       Set Display On
-       If EOT()
-         Do AvError with 'End of Table Encountered'
-         Go Bottom
-       EndIf
-       Do Centre with '              ',21
+    Do Centre with 'SEARCHING...',21
+    Set Display Off
+    Skip 5
+    Set Display On
+    If EOT()
+      Do AvError with 'End of Table Encountered'
+      Go Bottom
+    EndIf
+    Do Centre with '              ',21
   Case KeyStr = 'home'
-       Do Centre with 'SEARCHING...',21
-       Go Top
-       Do Centre with '              ',21
+    Do Centre with 'SEARCHING...',21
+    Go Top
+    Do Centre with '              ',21
   Case KeyStr = 'end'
-       Do Centre with 'SEARCHING...',21
-       Go Bottom
-       Do Centre with '              ',21
+    Do Centre with 'SEARCHING...',21
+    Go Bottom
+    Do Centre with '              ',21
   Case KeyStr = 'Del'
-       Do AvError with 'Delete This Record?'
-       Confirm = GetOption()
-       If Confirm = 'Y'
-         Delete
-         Go Top
-         Redraw = .T.
-       Endif
+    Do AvError with 'Delete This Record?'
+    Confirm = GetOption()
+    If Confirm = 'Y'
+      Delete
+      Go Top
+      Redraw = .T.
+    Endif
   Case KeyStr = 'Insert'
-       ThisRecord = Rec_No
-       Do NewFeature with New
-       Set Index to MagMain
-       Redraw = .T.
-       Go ThisRecord
+    ThisRecord = Rec_No
+    Do NewFeature with New
+    Set Index to MagMain
+    Redraw = .T.
+    Go ThisRecord
   Case KeyStr = 'Esc'
-       leave = .T.
-       redraw = .T.
+    leave = .T.
+    redraw = .T.
   Otherwise
-       Beep
+    Beep
 Endswitch
 EndWhile
 
@@ -319,4 +319,3 @@ freemem  = freemem / 1024
 diskdir  = DIRECTORY()
 diskdir  = UPPER(diskdir)
 @ 23,10 say 'DRIVE: ',diskdir,'    ',diskfree picture '5.0','k free on disk    ',freemem picture '3.0','k free memory'
-

@@ -10,9 +10,9 @@ procedure text
   parameter coloption
   Switch
     Case coloption = 'Normal'
-         Set color 3 to 3  && This value should be read from datafile later
+      Set color 3 to 3  && This value should be read from datafile later
     Case coloption = 'Inverse'
-         Set color 3 to 71
+      Set color 3 to 71
   Endswitch
 
 procedure BAR
@@ -33,71 +33,71 @@ procedure TOPLINE
   @ 0,pos+length+1 say CHR(16)
 
 procedure CENTRE
-   parameter message,line
-   private length
-   length = len(message)
-   @ line,1 clear to line,78         && clear line
-   @ line,(80-length)/2 say message
+  parameter message,line
+  private length
+  length = len(message)
+  @ line,1 clear to line,78         && clear line
+  @ line,(80-length)/2 say message
 
 Function GETOPTION returns character
 While Charwait()
-   key = Inkey()
+  key = Inkey()
 Endwhile
 key = 0
 WHILE key = 0
-   key = Inkey()
-   SWITCH
-      case key = 275
-         keystr = "rtn"
-      case key = 271
-         keystr = "esc"
-      case key = 256
-         keystr = "up"
-      case key = 257
-         keystr = "down"
-      case key = 258
-         keystr = "left"
-      case key = 259
-         keystr = "right"
-      case key = 263
-         keystr = "pgup"
-      case key = 262
-         keystr = "pgdn"
-      case key = 268
-         keystr = "home"
-      case key = 269
-         keystr = "end"
-      case key = 288
-         keystr = "tab"
-      case key = 266
-         keystr = "bksp"
-      case key = 265
-         keystr = "del"
-      case key = 264
-         keystr = "insert"
-      case key = 270
-         keystr = "f1"
-      case key = 384
-         keystr = "f2"
-      case key = 385
-         keystr = "f3"
-      case key = 386
-         keystr = "f4"
-      case key = 387
-         keystr = "f5"
-      case key = 388
-         keystr = "f6"
-      case key = 389
-         keystr = "f7"
-      case key = 390
-         keystr = "f8"
-      case key = 391
-         keystr = "f9"
-      case key = 392
-         keystr = "f10"
+  key = Inkey()
+  SWITCH
+    case key = 275
+      keystr = "rtn"
+    case key = 271
+      keystr = "esc"
+    case key = 256
+      keystr = "up"
+    case key = 257
+      keystr = "down"
+    case key = 258
+      keystr = "left"
+    case key = 259
+      keystr = "right"
+    case key = 263
+      keystr = "pgup"
+    case key = 262
+      keystr = "pgdn"
+    case key = 268
+      keystr = "home"
+    case key = 269
+      keystr = "end"
+    case key = 288
+      keystr = "tab"
+    case key = 266
+      keystr = "bksp"
+    case key = 265
+      keystr = "del"
+    case key = 264
+      keystr = "insert"
+    case key = 270
+      keystr = "f1"
+    case key = 384
+      keystr = "f2"
+    case key = 385
+      keystr = "f3"
+    case key = 386
+      keystr = "f4"
+    case key = 387
+      keystr = "f5"
+    case key = 388
+      keystr = "f6"
+    case key = 389
+      keystr = "f7"
+    case key = 390
+      keystr = "f8"
+    case key = 391
+      keystr = "f9"
+    case key = 392
+      keystr = "f10"
    Otherwise
       keystr = CHR(key)
-   ENDSWITCH
+  ENDSWITCH
 ENDWHILE
 RETURN keystr
 
@@ -108,10 +108,9 @@ return cmonth(d)+' '+ltrim(str(day(d)))+', '+ltrim(str(year(d)))
 function inlist returns l
 param x
 while parameters()>0
- param item
- if x==item
-  return .t.
- endif
+  param item
+  if x==item
+    return .t.
+  endif
 endwhile
 return .f.
-

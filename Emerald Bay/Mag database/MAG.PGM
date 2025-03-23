@@ -28,51 +28,51 @@ DO banner with 'MAGAZINE DATABASE / MAIN MENU'
 DO Status
 Clear gets
 @ 5,17 double box to 11,61
-@ 6,25 prompt '  New Entry                  ' NAMED "new";
-                                          message " Enter a new record";
-                                          right "new";
-                                          left "new";
-                                          up "Sysquit"
-@ 7,25 prompt '  Browse / Edit              ' NAMED "edit";
-                                          message " Browse and Edit records in current section";
-                                          left "edit";
-                                          right "edit"
-@ 8,25 prompt  '  Search for string          ' NAMED "search" message " Get a string and search for it";
-                                               left "search";
-                                               right "search"
-@ 9,25 prompt '  Filter string              ' NAMED "find" message " Set Search Filter - Press <RETURN> to CLEAR";
-                                            left "find";
-                                            right "find"
+@ 6,25 prompt '  New Entry              ' NAMED "new";
+                                        message " Enter a new record";
+                                        right "new";
+                                        left "new";
+                                        up "Sysquit"
+@ 7,25 prompt '  Browse / Edit          ' NAMED "edit";
+                                        message " Browse and Edit records in current section";
+                                        left "edit";
+                                        right "edit"
+@ 8,25 prompt  '  Search for string     ' NAMED "search" message " Get a string and search for it";
+                                        left "search";
+                                        right "search"
+@ 9,25 prompt '  Filter string          ' NAMED "find" message " Set Search Filter - Press <RETURN> to CLEAR";
+                                        left "find";
+                                        right "find"
 @ 10,25 prompt '  Quit to System Menu  <Esc> ' NAMED "Sysquit";
-                                           message " Close database and return to Top Level Menu";
-                                           left "Sysquit" right "Sysquit";
-                                           down "new"
+                                        message " Close database and return to Top Level Menu";
+                                        left "Sysquit" right "Sysquit";
+                                        down "new"
 do OptionPrompt
 READ
 keyopt = readget()
 KeyPressed = readkey()
 If keypressed <> 271
- SWITCH
-  CASE keyopt = 'new'
-       New = .T.
-       Do NewFeature with New
-  CASE keyopt = 'edit'
-       @ 14,26 say 'SEARCHING...                                      '
-       New = .F.
-       Current_Error = .F.
-       Do DisplayFeature       
-  CASE keyopt = 'find'
-       Do Set_Filter
-  CASE keyopt = 'search'
-       Do Set_Filter
-       @ 14,26 say 'SEARCHING...                                      '
-       New = .F.
-       Current_Error = .F.
-       Do DisplayFeature
-       Do Clear_Filter
-  CASE keyopt = 'Sysquit'
-       Out = .T.
- ENDSWITCH
+  SWITCH
+    CASE keyopt = 'new'
+      New = .T.
+      Do NewFeature with New
+    CASE keyopt = 'edit'
+      @ 14,26 say 'SEARCHING...                                      '
+      New = .F.
+      Current_Error = .F.
+      Do DisplayFeature
+    CASE keyopt = 'find'
+      Do Set_Filter
+    CASE keyopt = 'search'
+      Do Set_Filter
+      @ 14,26 say 'SEARCHING...                                      '
+      New = .F.
+      Current_Error = .F.
+      Do DisplayFeature
+      Do Clear_Filter
+    CASE keyopt = 'Sysquit'
+      Out = .T.
+  ENDSWITCH
 Else
   Out = .T.
 EndIf
@@ -80,4 +80,3 @@ ENDWHILE
 CLS
 Close Database
 QUIT
-
