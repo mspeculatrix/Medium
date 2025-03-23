@@ -1,0 +1,13 @@
+* AVACOL.PGM: sets standard colours
+set color 0 to 3        &&  Background (used by Clear)
+set color 1 to 2        &&  TTY output
+set color 2 to 79       &&  Error messages
+set color 3 to 3        &&  Label (for @..say, edit,append,browse)
+set color 4 to 48       &&  Data - displays in Browse
+set color 5 to 56       &&  Gets - data items for editing
+set color 6 to 78       &&  Current data item during editing
+set color 7 to 2        &&  Menu items
+set color 8 to 48       &&  Current menu selection
+set color 9 to 4        &&  Box
+set color 10 to 1       &&  Border
+set color 11 to 23      &&  Message Line

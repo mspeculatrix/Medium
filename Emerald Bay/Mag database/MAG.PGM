@@ -1,0 +1,83 @@
+* MAG.PGM
+
+LOAD avalanch.lib
+LOAD mag.lib
+
+SET DATABASE TO REFERENC
+PUBLIC LOGICAL New
+PUBLIC BoxCol, LabelCol, ErrorCol
+PUBLIC total_recs, valid_recs, filter_string
+PUBLIC CHARACTER defpub, defdate
+defpub = "*"
+defdate = "*"
+USE magazines
+Set INDEX to MagMain
+SET Beep 0 to 250,0.15     && Beep command
+SET Beep 6 to 150,0.2      && Data Item Full warning
+CLS
+DO avacol
+* System colours - retrieve these from file at later date
+BoxCol   = 2    && Green on black
+LabelCol = 3    && Cyan on black
+ErrorCol = 78   && Bright yellow on red
+filter_string = "* None *"
+Out = .F.
+WHILE .not. out
+CLS
+DO banner with 'MAGAZINE DATABASE / MAIN MENU'
+DO Status
+Clear gets
+@ 5,17 double box to 11,61
+@ 6,25 prompt '  New Entry                  ' NAMED "new";
+                                          message " Enter a new record";
+                                          right "new";
+                                          left "new";
+                                          up "Sysquit"
+@ 7,25 prompt '  Browse / Edit              ' NAMED "edit";
+                                          message " Browse and Edit records in current section";
+                                          left "edit";
+                                          right "edit"
+@ 8,25 prompt  '  Search for string          ' NAMED "search" message " Get a string and search for it";
+                                               left "search";
+                                               right "search"
+@ 9,25 prompt '  Filter string              ' NAMED "find" message " Set Search Filter - Press <RETURN> to CLEAR";
+                                            left "find";
+                                            right "find"
+@ 10,25 prompt '  Quit to System Menu  <Esc> ' NAMED "Sysquit";
+                                           message " Close database and return to Top Level Menu";
+                                           left "Sysquit" right "Sysquit";
+                                           down "new"
+do OptionPrompt
+READ
+keyopt = readget()
+KeyPressed = readkey()
+If keypressed <> 271
+ SWITCH
+  CASE keyopt = 'new'
+       New = .T.
+       Do NewFeature with New
+  CASE keyopt = 'edit'
+       @ 14,26 say 'SEARCHING...                                      '
+       New = .F.
+       Current_Error = .F.
+       Do DisplayFeature       
+  CASE keyopt = 'find'
+       Do Set_Filter
+  CASE keyopt = 'search'
+       Do Set_Filter
+       @ 14,26 say 'SEARCHING...                                      '
+       New = .F.
+       Current_Error = .F.
+       Do DisplayFeature
+       Do Clear_Filter
+  CASE keyopt = 'Sysquit'
+       Out = .T.
+ ENDSWITCH
+Else
+  Out = .T.
+EndIf
+ENDWHILE
+CLS
+Close Database
+QUIT
+

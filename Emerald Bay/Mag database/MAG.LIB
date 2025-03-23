@@ -1,0 +1,322 @@
+* MAG.LIB
+
+PROCEDURE optionPrompt
+@ 17,17 box to 20,61
+@ 16,19 say "Highlight option then press [Return] ..."
+total_recs = RECCOUNT()
+@ 18,19 say "Records in database: ",total_recs picture '7.0'
+@ 19,19 say "Current filter     : ",filter_string
+
+
+PROCEDURE SET_FILTER
+@ 14,26 say "Filter string: "
+ACCEPT TO filter_string
+IF filter_string <> "* None *"
+FILTER filter_string $ Publication
+FILTER IN filter_string $ Title
+FILTER IN filter_string $ Keywords[1]
+FILTER IN filter_string $ Keywords[2]
+ENDIF
+IF filter_string == ""
+  Do Clear_Filter
+ENDIF
+
+PROCEDURE Clear_Filter
+  Filter_String = "* None *"
+  SET FILTER TO
+
+PROCEDURE T_abort
+  @ 23,5 say 'Transaction Aborted'
+  Transaction abort
+
+PROCEDURE newfeature
+  Parameters Logical NewRecord
+PRIVATE NUMERIC abort
+PRIVATE CHARACTER TempPub
+TempPub = " "
+Abort = 0
+Cls
+Do TopLine with 'New Feature'
+@ 3,0 say 'Publication'
+set color 3 to 56
+@ 4,0 say defpub
+set color 3 to 3
+TempPub = select_pub()
+If TempPub = 'abort'
+  Beep
+Else
+  TRANSACTION BEGIN
+  If NewRecord
+    Append Blank replace publication with TempPub, issue with defdate
+  Else
+    Replace publication with TempPub
+  Endif
+  defpub = TempPub
+  @ 4,0 clear to 4,79
+  set color 3 to 56
+  @ 4,0 say Publication
+  set color 3 to 3
+  @ 6,0 say 'Issue Date (eg, 05 Mar 90, Feb 89)'
+  @ 6,35 get Issue Message ' Enter issue date'
+  @ 8,0 say 'Title/Headline'
+  @ 9,0 get Title Message ' Enter article title or headline'
+  @ 11,0 say 'Keywords'
+  For x from 1 to 2
+    @ 11+x,0 get Keywords[x] Message ' Enter Keywords'
+  Endfor
+  @ 15,0 say 'Start Page'
+  @ 15,11 get Startpage Message ' Enter first page of article'
+  READ
+  Abort = ReadKey()
+  If Abort <> 271
+    Okay = .F.
+    While .not. okay
+      Beep
+      @ 8,17 clear to 12,61
+      @ 8,17 double box to 12,61
+      @ 9,19 say 'Details Okay / Commit to Database? '
+      @10,19 say 'Yes or No      <Return>=YES '
+      keystr = GetOption()
+      If Inlist(keystr,'Y','N','rtn')
+        okay = .T.
+      Endif
+    Endwhile
+    If keystr = 'N'
+      Abort = 271
+    Else
+      Abort = 0
+    Endif
+  Endif
+  If Abort = 271
+    @ 11,19 say 'Entry Aborted'
+    Transaction Abort
+  Else
+    @ 11,19 say 'Transaction Accepted'
+    defdate = Issue
+    Transaction Commit
+  Endif
+Endif
+* END PROC
+
+FUNCTION select_pub RETURNS character
+PRIVATE CHARACTER keypressed, FTempPub
+PRIVATE NUMERIC Abortx
+FTempPub = "#"
+Pub = "+"
+clear gets
+SAVE SCREEN choicebox from 5,55 to 14,72
+@ 5,55 clear to 14,72
+@ 5,55 double box to 14,72
+@ 6,58 say "Select:"
+@ 7,57 prompt " USE DEFAULT  "  named "default";
+                            up "other";
+                            left "default";
+                            right "default"
+@ 8,57 prompt " AvWeek       " named "avweek";
+                            left "avweek";
+                            right "avweek"
+@ 9,57 prompt " Flying       " named "flying";
+                            left "flying";
+                            right "flying"
+@10,57 prompt " Flight Int   " named "flight";
+                               left "flight";
+                               right "flight" 
+@11,57 prompt " Pilot        " named "pilot";
+                            left "pilot";
+                            right "pilot"
+@12,57 prompt " Flyer        " named "flyer";
+                            left "flyer";
+                            right "flyer"
+@13,57 prompt " OTHER        " named "other";
+                               left "other";
+                               right "other";
+                               down "default"
+READ
+keypressed = readget()
+SWITCH
+  CASE keypressed = 'default'
+       pub = defpub
+  CASE keypressed = 'avweek'
+       pub = 'Aviation Week & Space Technology'
+  CASE keypressed = 'flying'
+       pub = 'Flying'
+  CASE keypressed = 'flight'
+       pub = 'Flight International'
+  CASE keypressed = 'pilot'
+       pub = 'Pilot'
+  CASE keypressed = 'flyer'
+       pub = 'Flyer'
+  CASE keypressed = 'other'
+       @ 4,0 get FTempPub picture '75x' option 'b+s+p+' Message ' Enter publication name'
+       READ
+       Abortx = ReadKey()
+       If Abortx <> 271
+         Pub = FTempPub
+       Else
+         Pub = 'abort'  
+       EndIf
+ENDSWITCH
+RESTORE SCREEN from choicebox at 5,55
+RETURN pub
+
+PROCEDURE displayfeature
+PRIVATE CHARACTER keystr
+PRIVATE LOGICAL leave
+Set index to MagMain
+Go Top
+CLS
+IF RecNo() = 0
+  Do No_Records
+ELSE
+leave = .F.
+While .not. leave
+ @ 1,0 box to 1,79
+ Do Print_browse_opt
+ Redraw = .F.
+  While .not. redraw
+  @ 0,0 clear to 0,79
+  @ 0,0 say Title
+  @ 2,0 clear to 20,79
+  @ 2,0 say Keywords[1]
+  @ 3,0 say Keywords[2]
+  @ 6,0 say Publication
+  @ 9,0 say 'Issue: ',Issue,'          Starting Page: ',StartPage
+  @ 15,0 say '[',Rec_No,']'
+  Set index to MagMain
+  Do display_browse_opt
+ Endwhile
+Endwhile
+ENDIF
+* END PROC
+
+PROCEDURE NO_RECORDS
+CLS
+DO AvError with "No Records Match Filter"
+@ 18,28 say CHR(16)," NO RECORDS AVAILABLE ",CHR(17)
+Do Centre with "Press <RETURN> to continue...",22
+SET FILTER TO
+filter_string = "* None *"
+WAIT " " FOR 60
+
+PROCEDURE display_browse_opt
+PRIVATE ThisRecord
+KeyOK = .F.
+While .not. KeyOK
+KeyStr = GetOption()
+KeyOK = .T.
+Do ClearError
+SWITCH
+  Case KeyStr = 'down'
+       Do Centre with 'SEARCHING...',21
+       Set Display Off
+       If .not. EOT()
+         Skip 1
+       Else
+         Beep
+       Endif
+       If EOT()
+         Skip -1
+         Do AvError with 'END OF DATA'
+         KeyOK = .F.
+       Endif
+       Set Display On
+       If .not. EOT()
+         Do Centre with '              ',21
+       Endif
+  Case KeyStr = 'up'
+       Do Centre with 'SEARCHING...',21
+       Set Display Off
+       If .not. BOT()
+         Skip -1
+       Else
+         Beep
+       Endif
+       If BOT()
+         Skip 1
+         Do AvError with 'START OF DATA'
+         KeyOK = .F.
+       Endif
+       Set Display On
+       If .not. BOT()
+         Do Centre with '              ',21
+       EndIf
+  Case KeyStr = 'PgUp'
+       Do Centre with 'SEARCHING...',21
+       Set Display Off
+       Skip -5
+       Set Display On
+       If BOT()
+         Do AvError with 'Start of Table Encountered'
+         Go Top
+       EndIf
+       Do Centre with '              ',21
+  Case KeyStr = 'PgDn'
+       Do Centre with 'SEARCHING...',21
+       Set Display Off
+       Skip 5
+       Set Display On
+       If EOT()
+         Do AvError with 'End of Table Encountered'
+         Go Bottom
+       EndIf
+       Do Centre with '              ',21
+  Case KeyStr = 'home'
+       Do Centre with 'SEARCHING...',21
+       Go Top
+       Do Centre with '              ',21
+  Case KeyStr = 'end'
+       Do Centre with 'SEARCHING...',21
+       Go Bottom
+       Do Centre with '              ',21
+  Case KeyStr = 'Del'
+       Do AvError with 'Delete This Record?'
+       Confirm = GetOption()
+       If Confirm = 'Y'
+         Delete
+         Go Top
+         Redraw = .T.
+       Endif
+  Case KeyStr = 'Insert'
+       ThisRecord = Rec_No
+       Do NewFeature with New
+       Set Index to MagMain
+       Redraw = .T.
+       Go ThisRecord
+  Case KeyStr = 'Esc'
+       leave = .T.
+       redraw = .T.
+  Otherwise
+       Beep
+Endswitch
+EndWhile
+
+PROCEDURE print_browse_opt
+@ 22,0 clear to 24,79
+@ 22,0 double box to 22,79
+@ 23,0 say '[ ',CHR(30),' ] Previous     [Ins] Edit       [Home/End ] Skip to End     [Esc] Main Menu'
+@ 24,0 say '[ ',CHR(31),' ] Next         [Del] Delete     [PgUp/PgDn] Fast Move       '
+
+PROCEDURE AVERROR
+  Parameters Character AvErrMessage
+Set color 3 to ErrorCol
+AvErrMessage = ' *** ' + AvErrMessage + ' *** '
+Beep
+Do Centre with AvErrMessage,21
+Wait ' ' to WaitString for 5
+Set Color 3 to LabelCol
+
+PROCEDURE CLEARERROR
+@ 21,0 clear to 21,79
+
+PROCEDURE STATUS
+PRIVATE table_name, diskfree, diskdir, freemem
+table_name = TABLE()
+table_name = UPPER(table_name)
+diskfree = DISKSPACE()
+diskfree = diskfree / 1024
+freemem  = memory()
+freemem  = freemem / 1024
+diskdir  = DIRECTORY()
+diskdir  = UPPER(diskdir)
+@ 23,10 say 'DRIVE: ',diskdir,'    ',diskfree picture '5.0','k free on disk    ',freemem picture '3.0','k free memory'
+

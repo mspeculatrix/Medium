@@ -1,0 +1,20 @@
+Before First Row
+{ output to file "MAGTEST.TXT" ;
+  page length 0 ;
+  page width 350 ;
+  margin bottom 0 ;
+  margin top 0 ;
+}
+
+Input
+{ Database "REFERENC" ;
+  Table "MAGAZINES" ;
+  Index "MAGMAIN" ;
+}
+
+Before Change of Magazines.Rec_no
+{ Print "@",Magazines.Publication,"@",Magazines.Issue,"@",Magazines.Title,"@",Magazines.Keywords[1],"@",Magazines.Keywords[2],"@",Magazines.Startpage,"\n" ;
+  Display Magazines.Title ;
+  Display "\n" ;
+}
+
