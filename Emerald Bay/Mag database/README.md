@@ -5,10 +5,13 @@ This is an app I wrote as a way of learning to use Eagle, a front-end client pro
 The files are:
 
 - User-created files:
+
         - `MAG.BAT` - a simple batch file that just runs the command: `eb eagle mag`.
         - `MAG.PGM` - the main Eagle program for the application. This includes/calls:
+
                 - `AVACOL.PGM` - a small program to set screen colours.
                 - `MAG.LIB` - a library of functions for this application.
+
         - `MAG.EBR` - not sure about this. It looks like it might be a config file for Eagle.
         - `AVALANCH.LIB` - a library of useful functions (my company at the time was called Avalanche, so I probably intended this to be a library to be used across a number of applications).
         - `REFERENC.EBD` - the binary database file.
