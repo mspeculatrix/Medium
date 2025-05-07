@@ -2,7 +2,7 @@
 
 This is an app I wrote as a way of learning to use Eagle, a front-end client program that works with the Emerald Bay database engine.
 
-The files are:
+The files are (I think):
 
 - User-created files:
   - `MAG.BAT` - a simple batch file that just runs the command: `eb eagle mag`.
