@@ -11,3 +11,5 @@ Your applications could be distributed with the single-user Emerald Bay engine, 
 I was given a review copy of Emerald Bay when it appeared (in 1988, if memory serves). I also visited Migent's offices in Incline Village, on the North Shore of Lake Tahoe (I was in Nevada to cover the Reno Air Races). I think I interviewed someone but can't remember if that ever resulted in an article.
 
 To learn how the system worked, I wrote a database to store information about aviation-related magazine articles. This is in the `Mag database` directory. It still runs (I tested it in DosBox on an M1 MacBook Air).
+
+The `PCA review.txt` file is the text of a review I wrote in 1988 for, I think, `PC Amstrad` magazine, although all traces of that magazine seem to have disappeared.

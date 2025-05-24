@@ -1,0 +1,76 @@
+(PCA / MANSFIELD / EAGLE / #)
+
+STEVE MANSFIELD
+BT Gold: 10074:MIK031
+
+EAGLE / EMERALD BAY by MIGENT
+
+When a company goes up against a product leader, and one whose name is virtually synonymous with the genre, it has to have a lot of confidence in its product. Ashton-Tate's dBase is to database management what Hoover is to vacuum cleaners - well, almost. Few companies have launched products in direct competition and lived to tell the tale.
+
+The dBase range has traditionally been the one corporates and other serious users have turned to for developing database applications. Yet this hasn't deterred Migent. The company, which is best known for the inexpensive and sometimes quirky Ability range, has launched its Emerald Bay database system at the top end of the market - at corporates who want to develop large and flexible database systems. And it has started the ball rolling with not one, but four, products.
+
+As you might guess, the complete system is not small and easily digestible. It would be foolish to try to attempt a comprehensive review in the space we have here. Instead, I'll try to give some idea of the overall structure of the system, as well as having a slightly closer look at what I think will become the most important package. Perhaps, once I have more experience of the system, the editor will let me bring you up to date.
+
+Emerald Bay is the generic name given to a suite of packages built around a common base. The first to hit the streets - and the one in direct competition to dBase - is Eagle. This is a database language from which custom-made applications can be built with, Migent hopes, comparative ease.
+
+For those who need more flexibility, a series of Developer's Toolkits is being produced. Each consists of code libraries which provide the necessary access to the Emerald Bay database files; the first is for the C language, but others are promised, including Pascal and Basic libraries.
+
+Summit is a database add-on for Lotus 1-2-3.
+
+And finally, there is the Database Server for running Emerald Bay applications across a local area network.
+
+Migent has managed to achieve this variety by splitting the database system into two parts. With each of the packages comes the core of the system, the `personal engine', which is responsible for keeping the database file and its indexes in order. The system is common to all the packages, so that if you buy all four products you will get the personal engine software and documentation four times.
+
+Eagle, Summit and programs written using the language libraries become what Migent calls `surfaces', sitting above the engine and accessing it in a way invisible to the end user. And this has several advantages. Not least of these is the fact that you can use the language most suitable to the kind of work you're doing. You could quite easily have applications based on C, Pascal, Eagle and 1-2-3 all accessing the same database file, and manipulating it in different ways.
+
+Emerald Bay has been designed with networks in mind, although it can be used on single PCs too. It's designed so that everything is handled by the server - security, data integrity and data handling. The remote terminal simply issues a request for data, and receives the results - there's no mass downloading of data files, so network traffic is minimised. Multi-level password security is provided, too.
+
+Migent claims that converting applications written on single-user system to run on networks is a simple matter of buying an installing the Database Server. This communicates with the Personal Engine to handle network traffic and maintain database integrity.
+
+The Personal Engine has three main components. The Database Administrator is a menu-driven program which enables you to create and define databases, specifying tables, fields and indexes, as well as field types and configurations. All of this can be done from within Eagle and the toolkit surfaces too, but this program is a faster and easier way of setting things up.
+
+Likewise with the forms generator. Creating screens is simple enough in Eagle, but the forms program does help you maintain a certain consistency in your screen designs. Using the cursor, fields can be quickly positioned on the screen, lines and boxes drawn, text added and so on. The form is then saved and can be called with a DOS program or from within Eagle.
+
+Finally, there's Report Writer for extracting information from a database. This is a C-like language, giving full printer and page control. By separating out the reporting facilities from Eagle, it allows a single report system irrespective of which languages are used to create or edit the database.
+
+After defining a database, the next step for most people will be to turn to Eagle to enter and manipulate the data. Eagle has several things going for it, even before you look at the software in detail. For a start, it's written by Wayne Ratliff, the original author of dBase, and the one person who should know where that software's weaknesses lie. Second, the latest version of dBase, called dBase III Plus, is already looking long in the tooth. It lacks much of the advanced network support which the larger customers need. Emerald Bay was launched while dBase IV was still being discussed in vague terms, and incorporates many of the features promised in Ashton- Tate's upgrade.
+
+Learning to use a new package is always intimidating, especially if it is large and complex. When the package is (in effect) a new computer language, the task is particularly difficult. All those things you can do without thinking in your favourite language - such as entering lines of text, reading menu selections from the keyboard, and error trapping - suddenly have to be discovered again.
+
+Existing dBase whizz-kids will have less of a problem than most. Eagle is essentially a superset of the dBase commands, and experienced users of Ashton- Tate's product will spend the first few hours wading through the manual, nodding their heads sagely at all the familiar commands and occasionally licking their lips in pleasurable anticipation of using the new facilities.
+
+But not me. I never had the time or the courage to wade into dBase. I was always content to use off-the- shelf, card index style programs. And to be fair (to myself) there was no reason to do anything else. If you application calls for maintaining simple lists, with reasonable reporting facilities and search options, then you're well advised to avoid the pain and slog of learning dBase or Eagle.
+
+There are two ways of working. You can type all the commands directly at the system prompt, or you can write programs in the Eagle language to manipulate the database - or both. Indeed, one of the strongest features of the package is the way you can mix both methods. Programs are written in plain ASCII text and can be run directly from the main prompt by typing `DO' followed by the program name. This means you can write small sections of code and test them before including them in the main program. Or, if you prefer to work with the command line interpreter anyway, you can write short programs to perform common keystroke sequences.
+
+A text editor is included in the package, and this can be called from within Eagle. However, it does raise the problem of learning yet another set of editor commands. For a while I used WordStar in nondocument mode. In the end, I found the best method was to pop into Sidekick and use its notepad. This had the advantage of letting me slip immediately back into Eagle, to try out a command or retrieve some information, and then go directly into the text again. The only drawback was Sidekick's tendency to reformat my text for me. In the end I learned to keep the lines of code quite short.
+
+Once your Eagle program is written, it can be put through the supplied compiler to create a stand-alone application. Migent has decided against charging a licence for such programs. Unfortunately, at the time of writing, the compiler was still not ready.
+
+Emerald Bay features strong data typing of fields. There are ten datatypes, including character, date, time, decimal, integer and so on. One of them, called binary, can cope with data of up to two billion bytes, and can be used for storing documents, programs, digitised pictures, screens - indeed, almost anything. There's also excellent control of data format. For example, if you want entries in a character field to be in the format of three numerals and three upper case characters separated by a space, then you can say so, and only that format will be allowed. As this is done at the definition stage, it's a once-only task, and saves enormous amounts of time and effort writing verification routines in he programs which use the database.
+
+Numeric fields can a fixed number of digits before and after the decimal point. And dates can be entered and displayed in a wide variety of formats. However they are stored internally in a fixed way which allows you to change the format at any time, no matter how it was originally entered.
+
+If simple data entry and extraction are all you want, then you don't need to write programs at all. Typing APPEND at the Eagle prompt offers a blank record for data entry, with proper full screen editing facilities. It's not pretty, but it works. EDIT does a similar job with the current record.
+
+For the person who want to be more sophisticated, Eagle provides a well-structured language, with constructs such as WHILE and FOR loops, and keywords which make the construction of menus a two-minute job.
+
+You need to be a programmer. Although you can use Eagle direct from the system prompt, it requires extensive knowledge of the language and a lot of typing. With the compiler and lack of royalties on applications, Eagle is a natural choice for commercial software developers, particularly those working in vertical and bespoke software markets. And those people are likely to be programmers anyway.
+
+There are holes in Eagle. For example, there seems to be no way of permanently relating fields, so that a change in one is automatically incorporated in another. And I'd like a NEXT command, which would move the record pointer to the next record, as defined by the current index; it's in the C toolkit, so why not Eagle? And there are still a few bugs to be worked out. But Migent is honest and diligent in its efforts to upgrade and fix the software; I'm currently on my third copy of Eagle, as Migent supplies free upgrades. And in that time several new commands have been added.
+
+There is one other question mark. The corporate database world is heading steadily towards SQL (structured query language) as a way of providing a standard interface and data retrieval system. As it stands, Emerald Bay is incompatible with SQL, which might be seen as a problem, especially by larger companies. However, Migent has promised that it will provide software tools - some time in the future - that will add SQL capability to Emerald Bay.
+
+There's no doubt that Emerald Bay must be considered an attractive alternative to dBase. And for people developing software for networks, it must now be the main contender.
+
+FOR: Very powerful; good screen handling and menu construction; very sophisticated data handling and formatting; excellent network support.
+
+AGAINST No ability to link fields; requires programming expertise; difficult to use straight from the box.
+
+Migent (UK) Ltd, 37 Dover Street, London W1X 3RB. Tel: 01-493 2655.
+
+PRICES (excluding VAT)
+- Eagle £395
+- Summit £159
+- Developer's Toolkit £395
+- Database Server £595
