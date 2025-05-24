@@ -4,7 +4,7 @@ Emerald Bay was a client/server database system written by Wayne Ratliff (the cr
 
 It used a core server engine, called Emerald Bay. This was available in two versions: a single-user program that ran locally on your PC as a TSR (Terminate and Stay Resident) program - basically sitting in the 130KB of memory; or as a network-based server that provided multi-user operations, transactional processing and other bells and whistles.
 
-The other main part of the solution was Eagle, a front-end client which you used to write database applications.
+The other main part of the solution was Eagle, a front-end client that you used to write database applications.
 
 Your applications could be distributed with the single-user Emerald Bay engine, so that they were effectively standalone.
 
