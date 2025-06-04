@@ -1,7 +1,5 @@
 # Medium
 
-Files to support my articles on Medium.
-
 This is a largely random collection of files to accompany articles posted to the [Machina Speculatrix publication](https://medium.com/machina-speculatrix) on Medium. (You'll need a Medium sub to read the articles.)
 
 - Arduino - various Arduino sketches.

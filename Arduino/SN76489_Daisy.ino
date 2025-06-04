@@ -9,7 +9,6 @@
  *
  * This is still pretty crude - playing a tune on just one channel. But it's a starting point for experimentation.
  *
- *
  */
 
 #define WRITE_ENABLE 10               // pin for /WE
